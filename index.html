@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication App | Motra</title>
+    <style>
+        body{
+            margin:0;
+            display: flex;
+            justify-content: center;
+            height: 100vh;
+            align-items: center;
+            text-align: center;
+            background-color:burlywood;
+            font-family: cursive;
+        }
+        .form{
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .3);
+            border-radius: 12px;
+            margin: 10px;
+            padding: 20px;
+        }
+        .input{
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 30px;
+            text-align: center;
+            padding:10px;
+            border:solid 4px green;
+            color: green;
+        }
+        .input::placeholder{
+            color: lightgray;
+            font-family: cursive;
+        }
+        .btn{
+            background-color: green;
+            color: white;
+            border: none;
+            display: block;
+            width: 100%;
+            padding: 20px;
+            font-size: 20px;
+            font-family: cursive;
+            margin: 20px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+        }
+        .btn:hover{
+            filter: brightness(0.9);
+        }
+        .score{
+            color: green;
+            text-align: right;
+        }
+
+
+    </style>
+</head>
+<body>
+    <form action="" class="form" id="form">
+        <h4 class="score" id="score"></h4>
+        <h1 id="question"></h1>
+        <input type="text" class="input" id="input" placeholder="Enter your answer" >
+        <button type="submit" class="btn">Submit</button>
+
+<script>
+ const num1 = Math.ceil(Math.random ()*10);
+ const num2 = Math.ceil(Math.random ()*10);
+
+const question = document.getElementById("question");
+const input = document.getElementById('input');
+const form = document.getElementById('form');
+const score = document.getElementById('score');
+let firstscore = JSON.parse(localStorage.getItem("firstscore"));
+if(!firstscore && firstscore<0){
+    firstscore = 0;
+}
+if( firstscore<0){
+    firstscore = 0;
+}
+
+score.innerHTML = `Score: ${firstscore}`
+question.innerHTML=`What is ${num1} multiply by ${num2}? `;
+const correntAns = num1*num2
+
+
+form.addEventListener("submit",()=>{
+const userAns = +input.value
+if(userAns === correntAns){
+    firstscore++;
+    updateLocalStorage()
+}else{
+    firstscore--;
+    updateLocalStorage()
+}
+});
+function updateLocalStorage(){
+    localStorage.setItem("firstscore",JSON.stringify(firstscore) )
+}
+
+
+
+
+</script>
+
+
+    </body>
+</html>
